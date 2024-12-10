@@ -51,7 +51,7 @@ const WelcomePage = () => {
                         <li>
                             {" "}
                             <a
-                                href="http://127.0.0.1:8000/categories"
+                                href="http://127.0.0.1:8000/api/categories"
                                 className="text-2xl font-bold ml-4 text-orange-500 hover:text-gray-300 flex items-center"
                             >
                                 {" "}
@@ -62,7 +62,7 @@ const WelcomePage = () => {
                         <li>
                             {" "}
                             <a
-                                href="http://127.0.0.1:8000/products"
+                                href="http://127.0.0.1:8000/api/products"
                                 className="text-2xl font-bold ml-4 text-orange-500 hover:text-gray-300 flex items-center"
                             >
                                 {" "}
@@ -119,7 +119,7 @@ const WelcomePage = () => {
                             La mejor tienda de cascos de motocicleta{" "}
                         </p>
                         <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => window.location.href = 'http://127.0.0.1:8000/categories'} > Explorar categorías </button>
+                        onClick={() => window.location.href = 'http://127.0.0.1:8000/api/categories'} > Explorar categorías </button>
                     </div>
                 </section>
                 <section className="container mx-auto p-4 pt-6 md:p-6 lg:px-16 xl:px-20">

@@ -21,8 +21,7 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/contacto', [ContactController::class, 'showContactForm'])->name('contact.show');
-Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -36,39 +35,45 @@ require __DIR__.'/auth.php';
 
 //CRUD categorias
 
-// Ruta para ver todas las categorías
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+// Ruta para Inertia.js y API JSON
+Route::get('/api/categories', [CategoryController::class, 'index'])->name('categories.index');
+
 // Ruta para ver una categoría específica
-Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/api/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 // Crear una nueva categoría
-Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::post('/api/categories', [CategoryController::class, 'store'])->name('categories.store');
 
 // Actualizar una categoría
-Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+Route::put('/api/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 
 // Eliminar una categoría
-Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+Route::delete('/api/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 
-//CRUD productos
+//CRUD PRODUCTOS
 
 // Ruta para ver todos los productos
-Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('api/products', [ProductController::class, 'index'])->name('products.index');
 
 // Ruta para ver un producto específico
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/api/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
 // Crear un nuevo producto
-Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::post('/api/products', [ProductController::class, 'store'])->name('products.store');
 
 // Actualizar un producto
-Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::put('/api/products/{product}', [ProductController::class, 'update'])->name('products.update');
 
 // Eliminar un producto
-Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::delete('/api/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+// productos slug
+Route::get('/products/{slug}', [ProductController::class, 'show'])->name('products.show');
 
+// Ruta para mostrar el formulario de contacto
+Route::get('/contacto', [ContactController::class, 'showContactForm'])->name('contact.show');
+Route::post('/send-email', [ContactController::class, 'sendEmail'])->name('send.email');
 
 Route::get('/{any}', function () {
     return view('app');

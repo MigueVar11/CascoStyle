@@ -6,19 +6,27 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Routing\Controller;
 
 class ProductController extends Controller
 {
+    // Renderiza la vista con Inertia para los productos
     public function index()
     {
-        // Obtener productos con su categoría relacionada
+        // Obtener todos los productos con su categoría relacionada
         $products = Product::with('category')->get();
 
-        // Enviar los datos a través de Inertia
-        return Inertia::render('Products/Index', [
-            'products' => $products
+        // Respuesta para solicitudes JSON (Postman)
+        if (request()->wantsJson()) {
+            return response()->json($products);
+        }
+
+        // Respuesta para Inertia.js
+        return inertia('Products/Index', [
+            'products' => $products,
         ]);
     }
+
     public function create()
     {
         $categories = Category::all();
@@ -46,10 +54,16 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Producto creado exitosamente.');
     }
 
-    public function show(Product $product) //Model Binding implementado
+    public function show($slug)
     {
-        return view('products.show', compact('product'));
-    }
+       // Buscar el producto por su slug
+    $product = Product::where('slug', $slug)->firstOrFail();
+
+    // Responder con Inertia
+    return inertia('Products/Show', [
+        'product' => $product,
+    ]);
+}
 
     public function edit(Product $product)
     {

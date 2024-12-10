@@ -33,6 +33,15 @@ function App() {
 
 
     );
+
+    createRoot(document.getElementById('app')).render(
+        <React.StrictMode>
+            <InertiaApp
+                initialPage={JSON.parse(document.getElementById('page').dataset.page)}
+                resolveComponent={(name) => import(`./Pages/${name}.jsx`).then((module) => module.default)}
+            />
+        </React.StrictMode>
+    );
 }
 
 export default App;

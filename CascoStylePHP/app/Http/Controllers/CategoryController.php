@@ -8,13 +8,21 @@ use Inertia\Inertia;
 
 class CategoryController extends Controller
 {
+    // API para devolver las categorías
     public function index()
     {
-        return Inertia::render('Categories/Index', [
-            'categories' => Category::all()
+        $categories = Category::all();
+
+        // Respuesta para Postman
+        if (request()->wantsJson()) {
+            return response()->json($categories);
+        }
+
+        // Respuesta para Inertia.js
+        return inertia('Categories/Index', [
+            'categories' => $categories,
         ]);
     }
-
     public function create()
     {
         return view('categories.create');

@@ -46,7 +46,7 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <NavLink
                                     href={route('contact.show')}
                                     active={route().current('contact.show')}
-                                >Contacto Compra
+                                >Contacto Compra Emails
                                 </NavLink>
                             </div>
                         </div>
